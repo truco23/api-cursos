@@ -1,0 +1,20 @@
+- criar a collections de categorias
+    - nome
+
+-criar o crud para categorias
+    - get
+    - get id
+    - put
+    - update
+    - delete
+
+- criar a collections de cursos
+    - nome
+    - categoria
+
+- criar o crud de cursos
+    - get
+    - get id
+    - put
+    - update
+    - delete

@@ -10,7 +10,21 @@ apiController.get = async (req, res) => {
         return categories
     } catch (error) {
         console.error(error)
-        return error
+        return error.message
+    }
+}
+
+apiController.getById = async (req, res) => {
+
+    try {
+        const { id } = req.params
+        const categorie = await modelCategories.find({ _id: id })
+
+        console.log('Categoria encontrada', JSON.stringify(categorie));
+        return { categorie }
+    } catch (error) {
+        console.error(error)
+        return error.message
     }
 }
 
@@ -29,18 +43,7 @@ apiController.create = async (req, res) => {
         return { categorie }
     } catch (error) {
         console.error(error)
-        return error
-    }
-}
-
-apiController.getById = async (req, res) => {
-    try {
-        console.log('Buscando dados categorias', req.params);
-        
-        return { success: req.params}
-    } catch (error) {
-        console.error(error)
-        return error
+        return error.message
     }
 }
 

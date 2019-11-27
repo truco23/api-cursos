@@ -48,13 +48,21 @@ apiController.create = async (req, res) => {
 }
 
 apiController.put = async (req, res) => {
+    
     try {
-        console.log('Alterando categoria', req.params, req.payload);
-        
-        return [{token: req.headers.token }, { id: req.params}, { payload: req.payload }]
+        const { id } = req.params
+        const { name } = req.payload
+        const newCategorie = await modelCategories.findOneAndUpdate({_id: id}, name)
+
+        newCategorie.set({name});
+        newCategorie.save();
+
+        console.log('Categoria alterada', JSON.stringify(newCategorie));
+        return { newCategorie }
     } catch (error) {
+
         console.error(error)
-        return error
+        return error.message
     }
 }
 

@@ -74,11 +74,11 @@ module.exports = server => {
                         id: Joi.required()
                     }),
                     payload: Joi.object({
-                        name: Joi.string()
+                        name: Joi.string().required()
                     }),
-                    headers: Joi.object({
-                        'token': Joi.string().required()
-                    }).unknown()
+                    // headers: Joi.object({
+                    //     'token': Joi.string().required()
+                    // }).unknown()
                 },
                 handler: categoriesController.put
             }

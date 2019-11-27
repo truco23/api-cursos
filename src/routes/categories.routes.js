@@ -4,6 +4,7 @@ const categoriesController = require('../controllers/categories.controller')
 module.exports = server => {
 
     const categoriesRoutes = [
+        // buscar todas as categorias
         {
             method:'GET',
             path: '/categories',
@@ -19,6 +20,7 @@ module.exports = server => {
                 handler: categoriesController.get
             }
         },
+        // buscar por id
         {
             method:'GET',
             path: '/categories/{id}',
@@ -37,6 +39,26 @@ module.exports = server => {
                 handler: categoriesController.getById
             }
         },
+        // criar
+        {
+            method:'POST',
+            path: '/categories/',
+            options: {
+                description: 'Rota criação de categoria',
+                notes: 'Criar categoria',
+                tags: ['api'], // ADD THIS TAG
+                validate: {
+                    failAction: (req, res, error) => {
+                        throw error
+                    },
+                    payload: Joi.object({
+                        name: Joi.string().required(),
+                    })
+                },
+                handler: categoriesController.create
+            }
+        },
+        // atualizar
         {
             method:'PUT',
             path: '/categories/{id}',
@@ -61,6 +83,7 @@ module.exports = server => {
                 handler: categoriesController.put
             }
         },
+        // remover
         {
             method:'DELETE',
             path: '/categories/{id}',

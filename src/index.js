@@ -7,7 +7,7 @@ const server = new Hapi.server({
 
 consign({ cwd: 'src' })
     .include('config')
-    // .then('models')
+    .then('models')
     .then('controllers')
     .then('routes')
     .into(server)

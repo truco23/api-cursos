@@ -68,9 +68,19 @@ apiController.put = async (req, res) => {
 
 apiController.delete = async (req, res) => {
     try {
-        console.log('Removendo categoria', req.params);
+        const { id } = req.params;
+        const categorieRemove = await modelCategories.findOneAndRemove({ _id: id })
+
+        if(!categorieRemove) {
+            console.log('Categoria não encontrada ou já foi removida da nossa base de dados');
+            return {error: 'Categoria não encontrada ou já foi removida da nossa base de dados' }
+        }
+
+        console.log('Categoria removida', JSON.stringify(categorieRemove));
+        return { success: 'Categoria removida' }
+        // console.log('Removendo categoria', req.params);
         
-        return { id: req.params}
+        // return { id: req.params}
     } catch (error) {
         console.error(error)
         return error

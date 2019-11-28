@@ -45,7 +45,11 @@ describe('Testes com as categorias', () => {
     });
 
     it('Testando a listagem de categorias', async () => {
-        deepEqual(true, true)
+
+        const [data] = await modelCategories.find({name: addCategorie.name})
+        const result = data.name
+        const expected = addCategorie.name
+        deepEqual(result, expected)
     });
 
     it('Testando a atualização de categoria', async () => {
@@ -55,8 +59,9 @@ describe('Testes com as categorias', () => {
     it('Testando a remoção de categoria', async () => {
 
         const [data] = await modelCategories.find({name: addCategorie.name})
-        const result = await modelCategories.findOneAndDelete({ _id: data._id })
-        const expected = result._id
-        deepEqual(result._id, expected._id)
+        const remove = await modelCategories.findOneAndDelete({ _id: data._id })
+        const result = remove._id
+        const expected = data._id
+        deepEqual(result, expected)
     })
 })

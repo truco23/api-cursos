@@ -16,6 +16,10 @@ module.exports = server => {
                     failAction: (req, res, error) => {
                         throw error
                     },
+                    query: Joi.object({
+                        page: Joi.number(),
+                        limit: Joi.number()
+                    })
                 },
                 handler: categoriesController.get
             }

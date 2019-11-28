@@ -5,7 +5,15 @@ const apiController = {}
 apiController.get = async (req, res) => {
     
     try {
-        const categories = await modelCategories.find({}).sort({ createdAt: -1 })
+        const { page = 1, limit = 10 } = req.query
+        const options = {
+            page,
+            limit,
+            sort: {
+                createdAt: -1
+            }
+        }
+        const categories = await modelCategories.paginate({}, options)
         console.log('Buscando as categorias', JSON.stringify(categories));
         return categories
     } catch (error) {

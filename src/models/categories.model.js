@@ -1,4 +1,5 @@
 const Mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2');
 const schemaCategories = new Mongoose.Schema({
 
     name: {
@@ -10,4 +11,8 @@ const schemaCategories = new Mongoose.Schema({
     timestamps: true
 })
 
-Mongoose.model('schemaCategories', schemaCategories)
+schemaCategories.plugin(mongoosePaginate)
+
+var myModel = Mongoose.model('schemaCategories', schemaCategories)
+
+myModel.paginate().then({})

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests/*test.js",
+    "tw": "mocha tests/*test.js -w",
     "dev": "nodemon src/index.js"
   },
   "keywords": [],
@@ -22,6 +23,7 @@
     "mongoose-paginate-v2": "^1.3.52"
   },
   "devDependencies": {
+    "mocha": "^6.2.2",
     "nodemon": "^2.0.1"
   }
 }

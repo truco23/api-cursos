@@ -24,7 +24,7 @@ describe('Testes com os cursos', () => {
         await mongoose.connection.on('connected', function(){
             conected = true
         });
-        // await modelCourses.create(addCourse)
+        await modelCourses.create(addCourse)
     })
 
     it('Testando conexão com o mongoDB', async () => {
@@ -51,6 +51,16 @@ describe('Testes com os cursos', () => {
         const course = {name: addCourse.name, description: addCourse.description}
         const result = {name: data.name, description: data.description}
         const expected = course
+
+        deepEqual(result, expected)
+    })
+
+    it('Testando a remoção de curso', async () => {
+        
+        const [data] = await modelCourses.find({name: addCourse.name})
+        const course = await modelCourses.findOneAndRemove({_id: data._id})
+        const result = course._id
+        const expected = data._id
 
         deepEqual(result, expected)
     })

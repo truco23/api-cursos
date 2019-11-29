@@ -86,9 +86,6 @@ apiController.delete = async (req, res) => {
 
         console.log('Categoria removida', JSON.stringify(categorieRemove));
         return { success: 'Categoria removida' }
-        // console.log('Removendo categoria', req.params);
-        
-        // return { id: req.params}
     } catch (error) {
         console.error(error)
         return error

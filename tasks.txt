@@ -1,5 +1,3 @@
-- teste alterar categoria
-
 - criar a collections de cursos
     - nome
     - categoria

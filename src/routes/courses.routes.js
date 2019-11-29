@@ -22,6 +22,27 @@ module.exports = server => {
                 },
                 handler: coursesController.get
             }
+        },
+        // criar curso
+        {
+            method:'POST',
+            path: '/courses',
+            options: {
+                description: 'Rota criação de cursos',
+                notes: 'Criar curso',
+                tags: ['api'], // ADD THIS TAG
+                validate: {
+                    failAction: (req, res, error) => {
+                        throw error
+                    },
+                    payload: Joi.object({
+                        idCategory: Joi.string(),
+                        name: Joi.string(),
+                        description: Joi.string()
+                    })
+                },
+                handler: coursesController.create
+            }
         }
     ]
 

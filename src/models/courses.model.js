@@ -10,6 +10,7 @@ const schemaCourses = new Mongoose.Schema({
         type: String
     },
     idCategory: {
+        required: true,
         type: Mongoose.Schema.Types.ObjectId,
         ref: 'schemaCategories'
     }

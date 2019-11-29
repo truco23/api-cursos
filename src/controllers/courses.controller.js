@@ -58,4 +58,23 @@ apiCourses.create = async (req, res) => {
     }
 }
 
+apiCourses.put = async (req, res) => {
+
+    try {
+        const { id } = req.params
+        const body = req.payload
+        const result = await modelCourses.findOneAndUpdate({ _id: id}, body)
+
+        result.set(body)
+        result.save()
+
+        log.list('Curso alterado', result)
+
+        return result
+    } catch (error) {
+        console.error(error);
+        return error.message
+    }
+}
+
 module.exports = apiCourses

@@ -56,12 +56,35 @@ module.exports = server => {
                         throw error
                     },
                     payload: Joi.object({
-                        idCategory: Joi.string(),
+                        idCategory: Joi.string().required(),
+                        name: Joi.string().required(),
+                        description: Joi.string().required()
+                    })
+                },
+                handler: coursesController.create
+            }
+        },
+        // alterar curso
+        {
+            method:'PUT',
+            path: '/courses/{id}',
+            options: {
+                description: 'Rota alteracao de cursos',
+                notes: 'Alterar curso',
+                tags: ['api'], // ADD THIS TAG
+                validate: {
+                    failAction: (req, res, error) => {
+                        throw error
+                    },
+                    params: Joi.object({
+                        id: Joi.string().required()
+                    }),
+                    payload: Joi.object({
                         name: Joi.string(),
                         description: Joi.string()
                     })
                 },
-                handler: coursesController.create
+                handler: coursesController.put
             }
         }
     ]

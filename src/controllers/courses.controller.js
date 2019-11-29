@@ -11,6 +11,10 @@ apiCourses.get = async (req, res) => {
             limit,
             sort: {
                 createdAt: -1
+            },
+            populate: {
+                path: 'idCategory',
+                select: 'name'
             }
         }
         const result = await modelCourses.paginate({}, options)
@@ -20,6 +24,21 @@ apiCourses.get = async (req, res) => {
         return { result }
     } catch (error) {
         console.error(error);
+        return error.message
+    }
+}
+
+apiCourses.getById = async (req, res) => {
+
+    try {
+        const { id } = req.params
+        const result = await modelCourses.find({ _id: id }).populate({ path: 'idCategory', select: 'name'})
+        
+        log.list('Curso encontrado', result)
+
+        return result
+    } catch (error) {
+        console.log(error);
         return error.message
     }
 }

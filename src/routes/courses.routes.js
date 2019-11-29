@@ -24,6 +24,25 @@ module.exports = server => {
                 handler: coursesController.get
             }
         },
+        // litar curso por id
+        {
+            method:'GET',
+            path: '/courses/{id}',
+            options: {
+                description: 'Rota de cursos',
+                notes: 'Buscar todos os cursos da aplicação',
+                tags: ['api'], // ADD THIS TAG
+                validate: {
+                    failAction: (req, res, error) => {
+                        throw error
+                    },
+                    params: Joi.object({
+                        id: Joi.string()
+                    })
+                },
+                handler: coursesController.getById
+            }
+        },
         // criar curso
         {
             method:'POST',

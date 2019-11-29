@@ -1,4 +1,5 @@
 const Mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 const schemaCourses = new Mongoose.Schema({
 
     name: {
@@ -18,5 +19,7 @@ const schemaCourses = new Mongoose.Schema({
 {
     timestamps: true
 })
+
+schemaCourses.plugin(mongoosePaginate)
 
 Mongoose.model('schemaCourses', schemaCourses)

@@ -4,8 +4,19 @@ const apiCourses = {}
 
 apiCourses.get = async (req, res) => {
     try {
+        const { page = 1, limit = 10 } = req.query
+        const options = {
+            page,
+            limit,
+            sort: {
+                createdAt: -1
+            }
+        }
+        const result = await modelCourses.paginate({}, options)
         
-        return { success: 'Busca cursos ok'}
+        console.log('Cursos listados', JSON.stringify(result));
+        
+        return { result }
     } catch (error) {
         console.error(error);
         return error.message

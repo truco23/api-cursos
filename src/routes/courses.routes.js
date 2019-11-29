@@ -4,6 +4,7 @@ const Joi = require('@hapi/joi')
 module.exports = server => {
 
     const coursesRoutes = [
+        // listas todos os cursos
         {
             method:'GET',
             path: '/courses',

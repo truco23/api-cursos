@@ -13,6 +13,4 @@ const schemaCategories = new Mongoose.Schema({
 
 schemaCategories.plugin(mongoosePaginate)
 
-var myModel = Mongoose.model('schemaCategories', schemaCategories)
-
-myModel.paginate().then({})
+Mongoose.model('schemaCategories', schemaCategories)

@@ -1,10 +1,5 @@
-- criar a collections de cursos
-    - nome
-    - categoria
-
-- criar o crud de cursos
-    - get
-    - get id
-    - put
-    - update
-    - delete
+- criar os teste para cursos
+    - conexão com mongo
+    - listagem
+    - cadastrado
+    - remoção

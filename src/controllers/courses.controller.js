@@ -1,6 +1,7 @@
 const Mongoose = require('mongoose')
 const modelCourses = Mongoose.model('schemaCourses')
 const apiCourses = {}
+const log = require('../helpers/log.helpers')
 
 apiCourses.get = async (req, res) => {
     try {
@@ -14,8 +15,8 @@ apiCourses.get = async (req, res) => {
         }
         const result = await modelCourses.paginate({}, options)
         
-        console.log('Cursos listados', JSON.stringify(result));
-        
+        log.list('Listagem de cursos', result)
+
         return { result }
     } catch (error) {
         console.error(error);
@@ -29,7 +30,8 @@ apiCourses.create = async (req, res) => {
         const { idCategory, name, description } = req.payload
         const result = await modelCourses.create({idCategory, name, description})
         
-        console.log('Curso criado com sucesso', JSON.stringify(result));
+        log.list('Novo curso criado', result)
+
         return { result }
     } catch (error) {
         console.error(error);

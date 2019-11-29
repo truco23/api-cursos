@@ -1,5 +1,6 @@
 const Mongoose = require('mongoose')
 const modelCategories = Mongoose.model('schemaCategories')
+const log = require('../helpers/log.helpers')
 const apiController = {}
 
 apiController.get = async (req, res) => {
@@ -14,7 +15,9 @@ apiController.get = async (req, res) => {
             }
         }
         const categories = await modelCategories.paginate({}, options)
-        console.log('Buscando as categorias', JSON.stringify(categories));
+
+        log.list('Listando as catorias', categories)
+
         return categories
     } catch (error) {
         console.error(error)
@@ -28,7 +31,8 @@ apiController.getById = async (req, res) => {
         const { id } = req.params
         const categorie = await modelCategories.find({ _id: id })
 
-        console.log('Categoria encontrada', JSON.stringify(categorie));
+        log.list('Categoria encontrada', categorie)
+
         return { categorie }
     } catch (error) {
         console.error(error)
@@ -47,7 +51,8 @@ apiController.create = async (req, res) => {
             return { error: 'Não foi possível criar a categoria' }
         }
 
-        console.log('Categoria criada com sucesso', JSON.stringify(categorie));
+        log.list('Nova categoria criada', categorie)
+
         return { categorie }
     } catch (error) {
         console.error(error)
@@ -65,7 +70,8 @@ apiController.put = async (req, res) => {
         newCategorie.set({name});
         newCategorie.save();
 
-        console.log('Categoria alterada', JSON.stringify(newCategorie));
+        log.list('Categoria alterada', newCategorie)
+
         return { newCategorie }
     } catch (error) {
 
@@ -84,7 +90,8 @@ apiController.delete = async (req, res) => {
             return {error: 'Categoria não encontrada ou já foi removida da nossa base de dados' }
         }
 
-        console.log('Categoria removida', JSON.stringify(categorieRemove));
+        log.list('Categoria removida', categorieRemove)
+
         return { success: 'Categoria removida' }
     } catch (error) {
         console.error(error)

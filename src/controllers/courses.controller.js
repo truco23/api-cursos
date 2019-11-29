@@ -77,4 +77,24 @@ apiCourses.put = async (req, res) => {
     }
 }
 
+apiCourses.delete = async (req, res) => {
+
+    try {
+        const { id } = req.params
+        const result = await modelCourses.findOneAndRemove({ _id: id })
+
+        if(!result) {
+            log.list('Curso não encontrado ou já foi removido', result)
+            return 'Curso não encontrado ou já foi removido'
+        }
+
+        log.list('Curso removido', result)
+        
+        return { success: 'Curso removido' }
+    } catch (error) {
+        console.error(error);
+        return error.message
+    }
+}
+
 module.exports = apiCourses

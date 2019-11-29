@@ -86,6 +86,25 @@ module.exports = server => {
                 },
                 handler: coursesController.put
             }
+        },
+        // remover curso
+        {
+            method:'DELETE',
+            path: '/courses/{id}',
+            options: {
+                description: 'Rota remoção de curso',
+                notes: 'Remover curso',
+                tags: ['api'], // ADD THIS TAG
+                validate: {
+                    failAction: (req, res, error) => {
+                        throw error
+                    },
+                    params: Joi.object({
+                        id: Joi.string().required()
+                    })
+                },
+                handler: coursesController.delete
+            }
         }
     ]
 

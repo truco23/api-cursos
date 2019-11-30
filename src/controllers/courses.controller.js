@@ -84,8 +84,8 @@ apiCourses.delete = async (req, res) => {
         const data = await modelCourses.find({ _id: id})
         
         if(!data.length) {
-            log.list('Curso não encontrado ou já foi removido', result)
-            return 'Curso não encontrado ou já foi removido'
+            log.list('Curso não encontrado ou já foi removido')
+            return { warning: 'Curso não encontrado ou já foi removido'}
         }
         
         const result = await modelCourses.deleteOne({ _id: id })

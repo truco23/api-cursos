@@ -1,29 +1,18 @@
+require('../src/models/categories.model')
 const { deepEqual } = require('assert')
 const mongoose = require('mongoose')
-require('../src/models/categories.model')
+const connection = require('../src/helpers/connection.helpers')
 const modelCategories = mongoose.model('schemaCategories')
-let conected = false;
 const addCategorie = { name: 'Categoria de teste' }
 const putCategorie = { name: 'Categoria para alteração' }
 const novoNome = 'Novo nome da categoria'
-
-function connection() {
-    mongoose.connect('mongodb://cursos:cursos@localhost:27017/cursos', { 
-        useNewUrlParser: true,
-        useCreateIndex :  true,
-        useUnifiedTopology: true
-    }, error => {
-        
-        if(!error) return error
-        console.log('Falha na conexão', error)
-    })
-}
+let conected = false;
 
 describe('Testes com as categorias', () => {
     
     before(async () => {
 
-        await connection()
+        await connection.get()
         await mongoose.connection.on('connected', function(){
             conected = true
         });
@@ -74,16 +63,15 @@ describe('Testes com as categorias', () => {
         const [removeCategorieAdd] = await modelCategories.find({name: addCategorie.name})
         const [removeCategoriePut] = await modelCategories.find({name: novoNome})
 
-        const removeAdd = await modelCategories.findOneAndDelete({ _id: removeCategorieAdd._id })
-        const removePut = await modelCategories.findOneAndDelete({ _id: removeCategoriePut._id })
+        const removeAdd = await modelCategories.deleteOne({ _id: removeCategorieAdd._id })
+        const removePut = await modelCategories.deleteOne({ _id: removeCategoriePut._id })
         
-        const resultAdd = removeAdd._id
-        const resultPut = removePut._id
+        const resultAdd = removeAdd.n
+        const resultPut = removePut.n
 
-        const expectedAdd = removeCategorieAdd._id
-        const expectedPut = removeCategoriePut._id
+        const expected = 1
 
-        deepEqual(resultAdd, expectedAdd)
-        deepEqual(resultPut, expectedPut)
+        deepEqual(resultAdd, expected)
+        deepEqual(resultPut, expected)
     })
 })

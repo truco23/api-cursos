@@ -1,5 +1,2 @@
 - criar os teste para cursos
-    - conexão com mongo
-    - listagem
-    - cadastrado
-    - remoção
+    - alteração

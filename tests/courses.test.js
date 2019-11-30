@@ -1,9 +1,10 @@
+require('../src/models/courses.model')
 const { deepEqual } = require('assert')
 const mongoose = require('mongoose')
-require('../src/models/courses.model')
 const modelCourses = mongoose.model('schemaCourses')
 let conected = false;
 const addCourse = { idCategory: '5de005219987c6351c7d4c0e', name: 'Curso teste', description: 'Descrição teste' }
+const putCourse = { idCategory: '5de005219987c6351c7d4c0e', name: 'Curso para alterar', description: 'Descrição par alterar' }
 
 function connection() {
     mongoose.connect('mongodb://cursos:cursos@localhost:27017/cursos', { 
@@ -25,6 +26,7 @@ describe('Testes com os cursos', () => {
             conected = true
         });
         await modelCourses.create(addCourse)
+        // await modelCourses.create(putCourse)
     })
 
     it('Testando conexão com o mongoDB', async () => {
@@ -54,6 +56,10 @@ describe('Testes com os cursos', () => {
 
         deepEqual(result, expected)
     })
+
+    it('Testando a alteração do curso', async () => {
+
+    });
 
     it('Testando a remoção de curso', async () => {
         

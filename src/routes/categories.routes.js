@@ -1,9 +1,5 @@
 const Joi = require('@hapi/joi')
 const categoriesController = require('../controllers/categories.controller')
-const cors = {
-    origin: ['*'],
-    additionalHeaders: ['cache-control', 'x-requested-with']
-}
 
 module.exports = server => {
 
@@ -13,7 +9,6 @@ module.exports = server => {
             method:'GET',
             path: '/categories',
             options: {
-                cors,
                 description: 'Rota de categorias',
                 notes: 'Buscar todas as categorias da aplicação',
                 tags: ['api'], // ADD THIS TAG
@@ -34,7 +29,6 @@ module.exports = server => {
             method:'GET',
             path: '/categories/{id}',
             options: {
-                cors,
                 description: 'Rota busca categoria pelo id',
                 notes: 'Buscar categoria pelo id',
                 tags: ['api'], // ADD THIS TAG
@@ -54,7 +48,6 @@ module.exports = server => {
             method:'POST',
             path: '/categories/',
             options: {
-                cors,
                 description: 'Rota criação de categoria',
                 notes: 'Criar categoria',
                 tags: ['api'], // ADD THIS TAG
@@ -74,7 +67,6 @@ module.exports = server => {
             method:'PUT',
             path: '/categories/{id}',
             options: {
-                cors,
                 description: 'Rota alteração de categoria',
                 notes: 'Alterar categoria pelo id',
                 tags: ['api'], // ADD THIS TAG
@@ -100,7 +92,6 @@ module.exports = server => {
             method:'DELETE',
             path: '/categories/{id}',
             options: {
-                cors,
                 description: 'Rota remoção de categoria',
                 notes: 'Remover categoria pelo id',
                 tags: ['api'], // ADD THIS TAG

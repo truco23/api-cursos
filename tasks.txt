@@ -1,2 +1,3 @@
-- criar os teste para cursos
-    - alteração
+- instalar socket.io
+    - configurar no cadastro de categorias
+    - configurar no cadastro de cursos

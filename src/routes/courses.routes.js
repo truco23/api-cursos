@@ -1,9 +1,5 @@
 const coursesController = require('../controllers/courses.controller')
 const Joi = require('@hapi/joi')
-const cors = {
-    origin: ['*'],
-    additionalHeaders: ['cache-control', 'x-requested-with']
-}
 
 module.exports = server => {
 
@@ -13,7 +9,6 @@ module.exports = server => {
             method:'GET',
             path: '/courses',
             options: {
-                cors,
                 description: 'Rota de cursos',
                 notes: 'Buscar todos os cursos da aplicação',
                 tags: ['api'], // ADD THIS TAG
@@ -34,7 +29,6 @@ module.exports = server => {
             method:'GET',
             path: '/courses/{id}',
             options: {
-                cors,
                 description: 'Rota de cursos',
                 notes: 'Buscar todos os cursos da aplicação',
                 tags: ['api'], // ADD THIS TAG
@@ -54,7 +48,6 @@ module.exports = server => {
             method:'POST',
             path: '/courses',
             options: {
-                cors,
                 description: 'Rota criação de cursos',
                 notes: 'Criar curso',
                 tags: ['api'], // ADD THIS TAG
@@ -76,7 +69,6 @@ module.exports = server => {
             method:'PUT',
             path: '/courses/{id}',
             options: {
-                cors,
                 description: 'Rota alteracao de cursos',
                 notes: 'Alterar curso',
                 tags: ['api'], // ADD THIS TAG
@@ -100,7 +92,6 @@ module.exports = server => {
             method:'DELETE',
             path: '/courses/{id}',
             options: {
-                cors,
                 description: 'Rota remoção de curso',
                 notes: 'Remover curso',
                 tags: ['api'], // ADD THIS TAG

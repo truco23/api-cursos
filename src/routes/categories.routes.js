@@ -7,10 +7,26 @@ module.exports = server => {
         // buscar todas as categorias
         {
             method:'GET',
-            path: '/categories',
+            path: '/categories/all',
             options: {
                 description: 'Rota de categorias',
                 notes: 'Buscar todas as categorias da aplicação',
+                tags: ['api'], // ADD THIS TAG
+                validate: {
+                    failAction: (req, res, error) => {
+                        throw error
+                    }
+                },
+                handler: categoriesController.getAll
+            }
+        },
+        // buscar todas as categorias por paginação
+        {
+            method:'GET',
+            path: '/categories',
+            options: {
+                description: 'Rota de categorias por paginação',
+                notes: 'Buscar categorias com paginação',
                 tags: ['api'], // ADD THIS TAG
                 validate: {
                     failAction: (req, res, error) => {

@@ -16,13 +16,22 @@ apiController.get = async (req, res) => {
         }
         const categories = await modelCategories.paginate({}, options)
 
-        log.list('Listando as catorias', categories)
+        log.list('Listando as catorias com paginação', categories)
 
         return categories
     } catch (error) {
         console.error(error)
         return error.message
     }
+}
+
+apiController.getAll = async (req, res) => {
+
+    const categories = await modelCategories.find({})
+
+    log.list('Listagem de todas as categorias', categories)
+    
+    return categories
 }
 
 apiController.getById = async (req, res) => {

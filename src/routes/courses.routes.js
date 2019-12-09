@@ -80,6 +80,7 @@ module.exports = server => {
                         id: Joi.string().required()
                     }),
                     payload: Joi.object({
+                        idCategory: Joi.string(),
                         name: Joi.string(),
                         description: Joi.string()
                     })

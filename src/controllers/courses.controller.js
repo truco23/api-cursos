@@ -1,5 +1,6 @@
 const Mongoose = require('mongoose')
 const modelCourses = Mongoose.model('schemaCourses')
+const modelCategories = Mongoose.model('schemaCategories')
 const apiCourses = {}
 const log = require('../helpers/log.helpers')
 
@@ -63,7 +64,19 @@ apiCourses.put = async (req, res) => {
     try {
         const { id } = req.params
         const body = req.payload
-        const result = await modelCourses.findOneAndUpdate({ _id: id}, body)
+        const values = JSON.stringify(body)
+        const valuesParse = JSON.parse(values)
+
+        if(valuesParse.idCategory) {
+            const category = await modelCategories.find({_id: valuesParse.idCategory})
+
+            if(!category) {
+                console.log('Categoria não encontrada')
+                return { error: 'Categoria não encontrada'}
+            }
+        }
+
+        const result = await modelCourses.findOneAndUpdate({ _id: id}, valuesParse)
 
         result.set(body)
         result.save()

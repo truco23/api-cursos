@@ -1,5 +1,6 @@
 const Mongoose = require('mongoose')
 const modelCategories = Mongoose.model('schemaCategories')
+const modelCourses = Mongoose.model('schemaCourses')
 const log = require('../helpers/log.helpers')
 const apiController = {}
 
@@ -27,7 +28,7 @@ apiController.get = async (req, res) => {
 
 apiController.getAll = async (req, res) => {
 
-    const categories = await modelCategories.find({})
+    const categories = await modelCategories.find({}).sort({createdAt: -1})
 
     log.list('Listagem de todas as categorias', categories)
     
@@ -90,15 +91,23 @@ apiController.put = async (req, res) => {
 }
 
 apiController.delete = async (req, res) => {
+
     try {
         const { id } = req.params;
         const categorie = await modelCategories.find({_id: id})
-        console.log('categoria', categorie);
-        
+
+        const courses = await modelCourses.find({idCategory: categorie})
+
+        if(courses) {
+            log.list('Esta categoria não pode ser removida, possui curso cadastrado')
+            return { message: 'Esta categoria não pode ser removida, possui curso cadastrado'}
+        }
+
         if(!categorie.length) {
             console.log('Categoria não encontrada ou já foi removida da nossa base de dados');
             return {error: 'Categoria não encontrada ou já foi removida da nossa base de dados' }
         }
+        
         const categorieRemove = await modelCategories.deleteOne({ _id: id })
 
 

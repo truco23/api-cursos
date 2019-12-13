@@ -96,15 +96,15 @@ apiController.delete = async (req, res) => {
         const { id } = req.params;
         const categorie = await modelCategories.find({_id: id})
 
-        const courses = await modelCourses.find({idCategory: categorie})
-
-        if(courses) {
+        const course = await modelCourses.find({idCategory: id})
+        
+        if(course.length) {
             log.list('Esta categoria não pode ser removida, possui curso cadastrado')
             return { message: 'Esta categoria não pode ser removida, possui curso cadastrado'}
         }
 
         if(!categorie.length) {
-            console.log('Categoria não encontrada ou já foi removida da nossa base de dados');
+            console.log('Categoria não encontrada ou já foi removida da nossa base de dados')
             return {error: 'Categoria não encontrada ou já foi removida da nossa base de dados' }
         }
         
